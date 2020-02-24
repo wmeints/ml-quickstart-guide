@@ -46,8 +46,8 @@ To watch the slides, follow these steps.
 
 1. First, clone the repository to disk.
 2. Next, install revelation with the command `pip install revelation`
-3. Then, run the command `revelation start <module-name>/slides.md` to start
-   the presentation (replace the name of the module).
+3. Then, run the command `revelation start slides/<module-name>/slides.md`
+   to start the presentation.
 
 ## Running the labs
 
