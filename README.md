@@ -55,7 +55,7 @@ Please navigate to the folder `labs` to find the labs for this course.
 We've split the labs into various subfolders that match the hours in the
 table of contents above.
 
-# For the trainer
+## For the trainer
 
 This course uses `reveal.js` through the `revelation` python package.
 You can use the <kbd>S</kbd> in any presentation to pull up the speaker notes.
