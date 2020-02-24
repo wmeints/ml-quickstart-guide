@@ -13,21 +13,21 @@ build your first machine learning project and bring it to production.
 
 ### DAY 1 - Getting started with machine learning
 
-- HOUR 1 - Introduction into ML
-- HOUR 2 - Doing maths with numpy
-- HOUR 3 - Data wrangling with pandas
-- HOUR 4 - Lab: Exploring data with numpy and pandas
-- HOUR 5 - Machine learning with scikit-learn
-- HOUR 6 - Lab: Building your own machine learning model
+- [HOUR 1 - Introduction into ML](./slides/hour-01)
+- [HOUR 2 - Doing maths with numpy](./slides/hour-02)
+- [HOUR 3 - Data wrangling with pandas](./slides/hour-03)
+- [HOUR 4 - Lab: Exploring data with numpy and pandas](./labs/lab-01)
+- [HOUR 5 - Machine learning with scikit-learn](./slides/hour-05)
+- [HOUR 6 - Lab: Building your own machine learning model](./labs/lab-02)
 
 ### DAY 2 - MLOps and cloud based machine learning
 
-- HOUR 7 - Setting up a machine learning project with cookiecutter templates
-- HOUR 8 - Lab: Setting up your project with cookiecutter templates
-- HOUR 9 - Introduction to running experiments with Azure Machine Learning Service
-- HOUR 10 - Lab: Running your project as an experiment in Azure Machine Learning Service
-- HOUR 11 - Deploying models to production with Azure Machine Learning Service
-- HOUR 12 - Lab: Deploying your model to production
+- [HOUR 7 - Setting up a machine learning project with cookiecutter templates](./slides/hour-07)
+- [HOUR 8 - Lab: Setting up your project with cookiecutter templates](./labs/lab-04)
+- [HOUR 9 - Introduction to running experiments with Azure Machine Learning Service](./slides/hour-09)
+- [HOUR 10 - Lab: Running your project as an experiment in Azure Machine Learning Service](./labs/lab-04)
+- [HOUR 11 - Deploying models to production with Azure Machine Learning Service](./slides/hour-11)
+- [HOUR 12 - Lab: Deploying your model to production](./labs/lab-05)
 
 ## System requirements
 
@@ -46,7 +46,8 @@ To watch the slides, follow these steps.
 
 1. First, clone the repository to disk.
 2. Next, install revelation with the command `pip install revelation`
-3. Then, run the command `revelation start <module-name>` to start the presentation (replace the name of the module).
+3. Then, run the command `revelation start <module-name>/slides.md` to start
+   the presentation (replace the name of the module).
 
 ## Running the labs
 
