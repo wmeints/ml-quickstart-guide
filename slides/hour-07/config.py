@@ -1,4 +1,3 @@
-from ../config import *
 # -*- coding: utf-8 -*-
 """
 Revelation presentation settings
@@ -26,6 +25,8 @@ REVEAL_VERTICAL_SLIDE_SEPARATOR = "---~"
 REVEAL_THEME = "moon"
 
 REVEAL_CONFIG = {
+    # Total time to present is 60 minutes
+    "totalTime": 60*60,
     # Display controls in the bottom right corner
     "controls": True,
     # Display a presentation progress bar

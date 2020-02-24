@@ -1,4 +1,3 @@
-from ../config import *
 # -*- coding: utf-8 -*-
 """
 Revelation presentation settings

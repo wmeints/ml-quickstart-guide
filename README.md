@@ -54,3 +54,11 @@ To watch the slides, follow these steps.
 Please navigate to the folder `labs` to find the labs for this course.
 We've split the labs into various subfolders that match the hours in the
 table of contents above.
+
+# For the trainer
+
+This course uses `reveal.js` through the `revelation` python package.
+You can use the <kbd>S</kbd> in any presentation to pull up the speaker notes.
+
+Every slide deck takes 60 minutes to work through. A pacing timer is included
+so you have an idea how fast you're going to through the materials.
