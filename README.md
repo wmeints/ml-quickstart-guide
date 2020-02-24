@@ -1,3 +1,9 @@
+# Machine Learning Quick Start Guide
+
+Welcome to the machine learning quick start guide course.
+We're pleased to present to you a very fast paced introduction into the world
+of machine learning.
+
 ## Goal for this training
 
 The goal for this training is to teach you the basic concepts and tools to succesfully
@@ -7,21 +13,21 @@ build your first machine learning project and bring it to production.
 
 ### DAY 1 - Getting started with machine learning
 
-HOUR 1 - Introduction into ML
-HOUR 2 - Doing maths with numpy
-HOUR 3 - Data wrangling with pandas
-HOUR 4 - Lab: Exploring data with numpy and pandas
-HOUR 5 - Machine learning with scikit-learn
-HOUR 6 - Lab: Building your own machine learning model
+- HOUR 1 - Introduction into ML
+- HOUR 2 - Doing maths with numpy
+- HOUR 3 - Data wrangling with pandas
+- HOUR 4 - Lab: Exploring data with numpy and pandas
+- HOUR 5 - Machine learning with scikit-learn
+- HOUR 6 - Lab: Building your own machine learning model
 
 ### DAY 2 - MLOps and cloud based machine learning
 
-HOUR 7 - Setting up a machine learning project with cookiecutter templates
-HOUR 8 - Lab: Setting up your project with cookiecutter templates
-HOUR 9 - Introduction to running experiments with Azure Machine Learning Service
-HOUR 10 - Lab: Running your project as an experiment in Azure Machine Learning Service
-HOUR 11 - Deploying models to production with Azure Machine Learning Service
-HOUR 12 - Lab: Deploying your model to production
+- HOUR 7 - Setting up a machine learning project with cookiecutter templates
+- HOUR 8 - Lab: Setting up your project with cookiecutter templates
+- HOUR 9 - Introduction to running experiments with Azure Machine Learning Service
+- HOUR 10 - Lab: Running your project as an experiment in Azure Machine Learning Service
+- HOUR 11 - Deploying models to production with Azure Machine Learning Service
+- HOUR 12 - Lab: Deploying your model to production
 
 ## System requirements
 
