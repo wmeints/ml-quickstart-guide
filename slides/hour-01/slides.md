@@ -139,22 +139,22 @@ Introduction into machine learning
 
 ### Scikit-learn
 
-- A scientific toolkit for building machine learning applications
-- Includes machine learning algorithms
-- Also includes tools to preprocess data and validate models
+- Machine learning toolkit
+- Preprocessing of data
+- Validation algorithms
 
 ---~
 
 ### Pandas
 
-- A data wrangling tool that uses the notion of data frames (tables)
-- Contains a lot of utility functions for statistical analysis of data
-- Also provides cool ways to visualize and edit data
+- Data wrangling
+- Visualization
+- Statistical analysis
 
 ---~
 
 ### Numpy
 
-- A basic numeric framework in Python for matrices and vectors
+- Matrix and vector math
 - Highly optimized for usage against a CPU
 - Basis for all the machine learning stuff
