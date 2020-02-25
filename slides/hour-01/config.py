@@ -22,7 +22,7 @@ REVEAL_VERTICAL_SLIDE_SEPARATOR = "---~"
 # Themes
 # beige, black, blood, league, moon, night, serif, simple, sky,
 # solarized, white
-REVEAL_THEME = "moon"
+REVEAL_THEME = "white"
 
 REVEAL_CONFIG = {
     # Total time to present is 60 minutes
@@ -90,4 +90,7 @@ REVEAL_CONFIG = {
     # Number, e.g. 100
     "parallaxBackgroundHorizontal": "",
     "parallaxBackgroundVertical": "",
+    "dependencies": [
+        { "src": "css/extra.css" }
+    ]
 }
