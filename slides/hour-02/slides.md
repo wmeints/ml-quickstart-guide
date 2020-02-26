@@ -22,7 +22,7 @@ Doing maths with numpy
 
 ---
 
-## Getting access to numpy
+## Getting numpy
 
 ```
 pip install numpy
