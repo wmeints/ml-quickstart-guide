@@ -12,19 +12,19 @@ Setting up a machine learning project with cookiecutter templates
 
 ---
 
-## Setting up a project correctly
-
-Goals for your ML project:
-
-* Maintainable code, you will change it
-* Reproducable results, somebody has to do it again
-* Tracable results, we'll have to explain why
+## A better setup for your machine learning project
 
 ---~
 
-## Setting up a project correctly
+### Goals for your ML project:
 
-5 steps for a better ML project:
+* Maintainable code
+* Reproducable results
+* Tracable results
+
+---~
+
+### 5 steps for a better ML project:
 
 1. Treat your data as immutable
 2. Save intermediate steps
@@ -34,28 +34,28 @@ Goals for your ML project:
 
 ---~
 
-# Treat your dataset as immutable
+### Treat your dataset as immutable
 
 * Overwriting data is a big no-no.
 * What happens if you make a mistake?
 
 ---~
 
-# Save intermediate results
+### Save intermediate results
 
-* I've run into problems where I had to rerun the preprocessing.
+* Sometimes you need to re-run
 * Easier if you have intermediate results
 
 ---~
 
-# Log information
+### Log information
 
 * Programs wil break!
 * Logging will save you a lot of time debugging
 
 ---~
 
-# Logging using structlog
+### Logging using structlog
 
 ```
 pip install structlog
@@ -74,14 +74,14 @@ log.error('Woops!')
 
 ---~
 
-# Turn your project into a proper package
+### Turn your project into a proper package
 
 Moves away from "works on my machine"
 towards a more friendly, works everywhere.
 
 ---~
 
-# Define a build pipeline for your project
+### Define a build pipeline for your project
 
 Use whatever you like, for example:
 
@@ -90,11 +90,11 @@ Use whatever you like, for example:
 
 ---
 
-# Setting up your data science project
+## Setting up your data science project
 
 ---~
 
-# A quick introduction to cookiecutter
+### A quick introduction to cookiecutter
 
 A templating tool for creating python projects
 
@@ -108,6 +108,6 @@ cookiecutter <template-url>
 
 ---~
 
-# The data science template
+### The data science template
 
 https://drivendata.github.io/cookiecutter-data-science/
