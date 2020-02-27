@@ -1,16 +1,19 @@
 # LAB 1 - Exploring data with numpy
 
-In this lab we'll start exploring data with numpy.
+In this lab we'll start exploring data with numpy and pandas.
 At the end of the lab you'll know
 
 - How to load data as numpy arrays
 - How to create new arrays
 - How to perform arithmic operations on arrays
-- How to slice arrays
-- How to process data in pandas
+- How to combine arrays in numpy
+- How to load data in pandas
+- How to slice data frames in pandas
+- How to combine data frames in pandas
 
 This lab has two parts, first, we'll use numpy to process data.
-Then, we'll take a look at pandas and how it improves upon numpy.
+Then, we'll take a look at pandas and how it improves upon numpy for
+processing data.
 
 ## Part 1: Using numpy to work with data
 
