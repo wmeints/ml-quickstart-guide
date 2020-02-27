@@ -4,19 +4,19 @@ Setting up a machine learning project with cookiecutter templates
 
 ---
 
+## Why you need a better setup for your project
+
+---~
+
 ## The challenge of using notebooks in your projects
 
 * Order of execution is not guaranteed
 * Merging is impossible
 * Can't be run from a build pipeline
 
----
-
-## A better setup for your machine learning project
-
 ---~
 
-### Goals for your ML project:
+### Quality goals for a typical ML project
 
 * Maintainable code
 * Reproducable results
@@ -83,14 +83,18 @@ towards a more friendly, works everywhere.
 
 ### Define a build pipeline for your project
 
+Allows you to define the order for the scripts.
+
 Use whatever you like, for example:
+* Makefile  <!-- .element: class="fragment" -->
+* Psake <!-- .element: class="fragment" -->
 
-* Makefile https://krzysztofzuraw.com/blog/2016/makefiles-in-python-projects.html
-* Psake https://github.com/psake/psake
-
+Note: 
+Makefile tutorial https://krzysztofzuraw.com/blog/2016/makefiles-in-python-projects.html
+Psake website https://github.com/psake/psake
 ---
 
-## Setting up your data science project
+## Setting up your data science project with the data science cookiecutter 
 
 ---~
 
