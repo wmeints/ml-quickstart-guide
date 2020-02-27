@@ -35,8 +35,10 @@ Follow the on-screen instructions to set up your project.
 
 ## Step 3: Converting an existing project
 
-In the previous labs you've worked on a data analysis job and a machine learning job.
-Take one of these projects, and try to fit them in the template.
+In the previous lab you've worked on creating a regression model.
+Take this project, and try to fit it in the template using the online manual.
+
+You can find more information here: https://drivendata.github.io/cookiecutter-data-science/#directory-structure
 
 Feel free to ask others for help, and discuss what you would choose as your solution
 for making the necessary scripts inside the data science project!
