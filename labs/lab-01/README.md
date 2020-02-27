@@ -212,7 +212,30 @@ Store the results in the variable `df_output`.
 Now that you've got the data merged, inspect the results by invoking the `head` method on `df_output`. This should show you ouput that looks like this:
 
 ```
-            population	employment_rate	absolute_employment
+            population	employment_rate
+---------------------------------------
+Afghanistan	  38100000	           49.5
+Albania	       2940000	           47.2
+Algeria	      43300000	           37.1
+Andorra	         77200	            NaN
+Angola	      32800000	           70.3
+```
+
+### Step 10: Calculating absolute employment values
+
+Now that we have a merged dataset we can calculate the absolute employment
+figures again. It's much the same as in numpy. Grab the right columns
+from the data frame and multiply them to get the absolute figures!
+
+Remember, you can use df['col_name'] to select a single column!
+
+Assign the output of your calculation to the new column `absolute_employment`.
+
+After you've calculate the employment figures, inspect the data frame.
+It should look like this:
+
+```
+population	employment_rate	absolute_employment
 -----------------------------------------------------------
 Afghanistan	  38100000	           49.5	         18859500.0
 Albania	       2940000	           47.2	          1387680.0
@@ -220,6 +243,8 @@ Algeria	      43300000	           37.1	         16064300.0
 Andorra	         77200	            NaN	                NaN
 Angola	      32800000	           70.3	         23058400.0
 ```
+
+That's it, you've now processed data in numpy and pandas.
 
 ## Summary
 
