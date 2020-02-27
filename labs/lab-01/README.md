@@ -235,9 +235,9 @@ After you've calculate the employment figures, inspect the data frame.
 It should look like this:
 
 ```
-population	employment_rate	absolute_employment
+            population	employment_rate	absolute_employment
 -----------------------------------------------------------
-Afghanistan	  38100000	           49.5	         18859500.0
+Afghanistan   38100000	           49.5	         18859500.0
 Albania	       2940000	           47.2	          1387680.0
 Algeria	      43300000	           37.1	         16064300.0
 Andorra	         77200	            NaN	                NaN
