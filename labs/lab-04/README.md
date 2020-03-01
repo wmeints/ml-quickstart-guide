@@ -266,7 +266,18 @@ This script performs the following steps:
 - After that, it creates a new scikit-learn estimator trainer
 - Finally, it submits the trainer to the experiment as a new run
 
-Run the script using the following command:
+After creating the script to submit the experiment, we need to modify the training
+script itself, so it is compatible with how we run the experiment on the remote
+environment.
+
+Copy the following content to `src/models/train.py`:
+
+```python
+
+```
+
+Now that you've setup the training script, run the `submit_experiment.py` script
+to submit the training script to the cluster.
 
 ```
 python src/models/submit_experiment.py
