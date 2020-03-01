@@ -4,7 +4,9 @@ In this lab we'll explore how to use Azure Machine Learning Service to run exper
 We'll cover the following topics:
 
 - Setting up a machine learning workspace
+- Setting up your project
 - Creating a dataset
+- Setting up a compute environment
 - Running an experiment
 
 ## Setting up a machine learning workspace
@@ -72,6 +74,28 @@ the workspace. Follow these steps to prepare your computer:
 - Open an Anaconda prompt
 - Execute the command `pip install azureml-sdk`
 
+## Setting up your project
+
+There's numerous ways in which you can set up a project for use with 
+Azure Machine Service. We're going to use another cookiecutter template,
+that's specifically made for the purpose of running on Azure Machine Learning
+Service.
+
+Create a new project using the following command:
+
+```
+cookiecutter https://github.com/wmeints/azureml-cookiecutter
+```
+
+Cookiecutter will ask you for the following parameters:
+
+- `project_dir`: The folder where to create the project, enter `autompg` as the value.
+- `project_name`: The full name of the project, enter a descriptive name.
+- `package_name`: The package name to create, enter `autompg` as the value.
+
+After you've created the project, explore the README.rst file to get a sense
+of what's included in the project.
+
 ## Creating a dataset
 
 Once the workspace is ready, navigate to the `starter` folder and open it
@@ -80,43 +104,19 @@ in VSCode.
 Next, navigate to the workspace on the Azure Portal (https://portal.azure.com).
 Download the `config.json` file and save it in the root of your project folder.
 
-Then, copy the following code into the file `src/data/make_dataset.py`.
+After we've configured your project, we need to upload a dataset to the workspace.
+For this you're going to need a dataset. You can find the dataset in 
+[data/auto-mpg.csv](data/auto-mpg.csv). Copy this file to the `data/raw` folder in
+your project.
 
-```python
-import logging
-import click
-from pathlib import Path
-from azureml.core import Workspace, Dataset
+In the project folder, you'll find a sub-folder `tasks` that contains a file
+`make_dataset.py`. Execute the following command to upload your data to the workspace.
 
-
-@click.command()
-@click.argument('input_filepath', type=click.Path(exists=True))
-@click.argument('dataset_name', type=str)
-def main(input_filepath, dataset_name):
-    ws = Workspace.from_config()
-    datastore = ws.get_default_datastore()
-
-    logging.info(f'Uploading {input_filepath} to the workspace')
-
-    datastore.upload(input_filepath, target_path=f'processed/{dataset_name}',
-                     overwrite=True, show_progress=True)
-
-    logging.info('Registering the uploaded data as a dataset')
-
-    dataset = Dataset.Tabular.from_delimited_files(
-        path=[(datastore, f'processed/{dataset_name}')])
-
-    dataset.register(ws, dataset_name)
-
-
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-    logging.basicConfig(level=logging.INFO, format=log_fmt)
-
-    main()
+```
+python tasks/make_dataset.py --name autompg --input_folder data/raw --output_folder autompg
 ```
 
-This script performs the following steps:
+The `make_dataset` task performs the following steps:
 
 - It retrieves the workspace based on the `config.json` you created.
 - Next, it determines the default data store for the workspace.
@@ -124,17 +124,28 @@ This script performs the following steps:
 - After, it creates a new dataset from the blob storage path.
 - Finally, it registers the dataset.
 
-Run the experiment using the following command:
-
-```
-python src/data/make_dataset.py data/external auto-mpg
-```
-
-The first argument is the input folder where the data is located.
-The second argument is the name of the dataset that's created.
-
-When you've set up the dataset for your experiment, it's time to set up the
+When you've set up the dataset for your experiment, it's time to configure the
 experiment itself.
+
+**Note:** A lot of the work to create workspaces, datasets, etc. is done for you.
+Feel free to explore the scripts in the `tasks` folder inside your project. You
+may need to modify them in the future.
+
+## Setting up a compute environment
+
+The next step is to create a new compute environment for training the model.
+The project that we generated contains a task `tasks/make_environment.py`.
+
+Use the following command to execute the script:
+
+```
+python tasks/make_environment.py --name autompgtrain --vm_size Standard_D3_v2 --nodes 1
+```
+
+This will create a new environment for training the model. It will take a while
+for the command to complete. 
+
+After you've created the environment, continue to the next step, training the model.
 
 ## Running an experiment
 
@@ -144,150 +155,81 @@ in two ways:
 - On your local machine
 - On a remote compute target
 
-We'll start training from your local machine.
+We're going to explore how to run an experiment on a remote environment.
+For this, we're going to have to modify `autompg/train.py`. 
 
-### Running an experiment on a local machine
-
-In the project, create a new file `src/models/train.py` and add the
-following content to the file:
+Copy the following content to the `autompg/train.py` file:
 
 ```python
-import click
-import pickle
-from azureml.core import Workspace, Experiment, Dataset
-from sklearn.model_selection import train_test_split
+import joblib
+from azureml.core import Run
 from sklearn.linear_model import LinearRegression
+from sklearn.model_selection import train_test_split
+
+# The run is automatically determined.
+# Use this to log data, get access to dataset, and publish your model.
+run = Run.get_context()
+
+# STEP 1: Get the datasets
+################################################################################
+# Datasets are made available in the input_datasets dictionary.
+
+df_autompg = run.input_datasets['autompg'].to_pandas_dataframe()
+
+X = df_autompg[['cylinders','displacement','horsepower','weight','acceleration']]
+y = df_autompg['mpg']
+
+X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2)
+
+# STEP 2: Preprocess the dataset
+################################################################################
+# Perform some last-minute transformations before training the model here.
 
 
-@click.command()
-def main():
-    workspace = Workspace.from_config()
-    dataset = Dataset.get_by_name(workspace, 'auto-mpg')
+# STEP 3: Train the model
+################################################################################
+# Train your model here. Please note, we're assuming scikit-learn in the 
+# train_model task. If you plan to use Tensorflow, be sure to change the 
+# estimator in the task as well. You can find more information here:
+# https://docs.microsoft.com/en-us/azure/machine-learning/how-to-train-ml-models
+# 
+# Use run.log(), run.log_image(), run.log_table()
+# or run.log_row() to log metrics as part of the run.
+# You can learn more about logging here:
+# https://docs.microsoft.com/en-us/azure/machine-learning/how-to-track-experiments
 
-    df_milage = dataset.to_pandas_dataframe()
+model = LinearRegression()
+model.fit(X_train, y_train)
 
-    X = df_milage[['cylinders', 'displacement', 'horsepower',
-                   'weight', 'acceleration', 'model year', 'origin']]
-    y = df_milage[['mpg']]
+score = model.score(X_test, y_test)
 
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+run.log('r_squared', score)
 
-    experiment = Experiment(workspace, 'linear_regression')
+# STEP 4: Register the model
+################################################################################
+# First, store the model on disk by using joblib.dump('outputs/model.bin')
+# then, call run.upload_file('model.bin', 'outputs/model.bin')
+# after that, call run.register_model('model_name', 'model.bin')
 
-    with experiment.start_logging() as run:
-        model = LinearRegression()
-        model.fit(X_train, y_train)
+joblib.dump(model, 'outputs/model.bin')
 
-        run.log('r_squared', model.score(X_test, y_test))
-
-
-if __name__ == '__main__':
-    main()
+run.upload_file('model.bin', 'outputs/model.bin')
+run.register_model('autompg', 'model.bin')
 ```
 
 This script performs the following steps:
 
 - It will retrieve the workspace based on the `config.json` in the project.
 - Next, it will retrieve the dataset and preprocess it for training.
-- Then, it will create a new experiment.
-- After that, it will start a new run.
-- Finally, it will train the model and log the metrics to the experiment run.
+- Then, it will use the training set to train the model
+- After that, it will validate the model and log the score
+- Finally, it will save the model and register it in the workspace
 
-Start the script using the following command:
-
-```
-python src/models/train.py
-```
-
-We're not storing the trained model for now, we'll look at that in the next lab.
-
-Now that you've trained the model, navigate to https://ml.azure.com/
-log in and check the results in the portal. You can find the results
-under `Experiments` in the navigation bar on the left of the screen.
-
-### Creating a compute environment
-
-Training locally is not the only option. You can also train your experiment
-on a remote compute target.
-
-To create a new compute target, follow these steps:
-
-- Navigate to https://ml.azure.com/
-- Click on `Compute`
-- Click on the `Training cluster` tab
-- Click `New`
-- Choose a name for the virtual machine
-- Specify `STANDARD_D3_V2` as the VM size
-- Click `Create`
-
-![VM Creation wizard](media/create-compute-target.png)
-
-### Running an experiment remotely
-
-Now that you have a remote training cluster, you can start running experiments against it.
-Create a new file `src/models/submit_experiment.py` and copy the following code into the file:
-
-```python
-import shutil
-import click
-from pathlib import Path
-from azureml.core import Workspace, Experiment, Dataset, Run, ComputeTarget
-from azureml.train.sklearn import SKLearn
-
-
-@click.command()
-def main():
-    workspace = Workspace.from_config()
-    experiment = Experiment(workspace, 'linear_regression')
-    compute_target = ComputeTarget(workspace, 'mlc-training-ml')
-
-    root_folder = str(Path(__file__).parent)
-
-    shutil.copy(Path(root_folder, '../../config.json'),
-                Path(root_folder, 'config.json'))
-
-    estimator = SKLearn(source_directory=root_folder,
-                        compute_target=compute_target,
-                        entry_script='train.py')
-
-    experiment.submit(estimator)
-
-
-if __name__ == '__main__':
-    main()
+Start training the model using the following command:
 
 ```
-
-This script performs the following steps:
-
-- First, it retrieves the workspace
-- Then, it retrieves the experiment from the workspace
-- Next, it looks up the compute target that we created
-- After that, it creates a new scikit-learn estimator trainer
-- Finally, it submits the trainer to the experiment as a new run
-
-After creating the script to submit the experiment, we need to modify the training
-script itself, so it is compatible with how we run the experiment on the remote
-environment.
-
-Copy the following content to `src/models/train.py`:
-
-```python
-
+python tasks/train_model.py --experiment autompg --environment autompg-train --dataset autompg
 ```
 
-Now that you've setup the training script, run the `submit_experiment.py` script
-to submit the training script to the cluster.
-
-```
-python src/models/submit_experiment.py
-```
-
-After the experiment is started, you can monitor its progress through the portal
-
-- Navigate to https://ml.azure.com/
-- Select experiments
-- Click on the experiment
-
-You'll find it queued. It will take a few minutes for the training cluster
-to spin up and run your experiment.
+This command will run the experiment and log the results to the workspace.
+You can view the results on https://ml.azure.com/
