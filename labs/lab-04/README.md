@@ -228,7 +228,7 @@ This script performs the following steps:
 Start training the model using the following command:
 
 ```
-python tasks/train_model.py --experiment autompg --environment autompg-train --dataset autompg
+python tasks/train_model.py --experiment autompg --environment autompgtrain --dataset autompg
 ```
 
 This command will run the experiment and log the results to the workspace.
